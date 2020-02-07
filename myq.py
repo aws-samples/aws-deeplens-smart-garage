@@ -2,8 +2,9 @@
         Copyright 2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
         SPDX-License-Identifier: MIT-0
 
-        Disclaimer: The code here can vary depends on the atual hardware maker and 
-        The authors claim no responsibility for damages to your garage door or property by use of the code within.
+        Disclaimer: The code here is based off of an unsupported API from Chamberlain
+        and is subject to change without notice. The authors claim no responsibility
+        for damages to your garage door or property by use of the code within.
 '''
 
 import requests
@@ -13,7 +14,7 @@ import os
 import json
 
 class myqapi:
-	# These constants can vary depends on the atual hardware maker
+	# These constants can vary depends on the atual hardware
         app_id = os.environ['APP_ID']
         device_list_endpoint = os.environ['DEVICE_LIST_ENDPOINT']
         device_set_endpoint = os.environ['DEVICE_SET_ENDPOINT']
@@ -125,7 +126,7 @@ class myqapi:
                 deviceid = self.get_garagedeviceid(description)
                 devices = self.get_devices()
                 garagedoors = [x for x in devices if x['MyQDeviceTypeName'] == 'Garage Door Opener WGDO']
-                print (garagedoors)
+                # print (garagedoors)
                 garagedoor = garagedoors[0]['Attributes']
                 state = [x['Value'] for x in garagedoor if x['AttributeDisplayName'] == "doorstate"]
 

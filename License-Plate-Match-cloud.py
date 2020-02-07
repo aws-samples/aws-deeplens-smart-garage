@@ -1,6 +1,10 @@
 '''
         Copyright 2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
         SPDX-License-Identifier: MIT-0
+
+        Disclaimer: The code here is based off of an unsupported API from Chamberlain
+        and is subject to change without notice. The authors claim no responsibility
+        for damages to your garage door or property by use of the code within.
 '''
 
 import json
@@ -26,7 +30,8 @@ def lambda_handler(event, context):
     plate_detected = False
     bucket = event['Records'][0]['s3']['bucket']['name']
     key = event['Records'][0]['s3']['object']['key']
-
+    #bucket = 'car-license-plate-demo'
+    #key = 'test.jpg'
     image = {
         'S3Object': {
             'Bucket': bucket,
@@ -39,12 +44,13 @@ def lambda_handler(event, context):
             plate_detected = True
             break
     if plate_detected:
+        #tweak based on license plate format
         PlateNumber = rekognition.detect_text(Image=image)
         PlateNumber = PlateNumber['TextDetections'][1]['DetectedText']
         PlateNumber = re.sub('[^a-zA-Z0-9 \n\.]', '', PlateNumber).replace(" ","")
         print (PlateNumber)
 
-        match = match_plate("CarInfo", "LicensePlate", PlateNumber)
+        match = match_plate("CarInfo2", "LicensePlate", PlateNumber)
 
         if match == 1:
             print ('License Plate Match Found')
