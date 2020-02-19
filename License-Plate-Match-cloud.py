@@ -44,7 +44,7 @@ def lambda_handler(event, context):
             plate_detected = True
             break
     if plate_detected:
-        #tweak based on license plate format
+        #adjust the following code based on license plate format
         PlateNumber = rekognition.detect_text(Image=image)
         PlateNumber = PlateNumber['TextDetections'][1]['DetectedText']
         PlateNumber = re.sub('[^a-zA-Z0-9 \n\.]', '', PlateNumber).replace(" ","")
