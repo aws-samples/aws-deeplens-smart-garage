@@ -20,7 +20,8 @@ import zipfile
 import sys
 import datetime
 
-#boto3 is not installed on device by default.
+"""
+#boto3 is now installed on device by default with latest software.
 
 boto_dir = '/tmp/boto_dir'
 if not os.path.exists(boto_dir):
@@ -29,7 +30,7 @@ urllib.urlretrieve("https://s3.amazonaws.com/dear-demo/boto_3_dist.zip", "/tmp/b
 with zipfile.ZipFile("/tmp/boto_3_dist.zip", "r") as zip_ref:
     zip_ref.extractall(boto_dir)
 sys.path.append(boto_dir)
-
+"""
 import boto3
 
 bucket_name = "REPLACE-WITH-NAME-OF-YOUR-S3-BUCKET"
