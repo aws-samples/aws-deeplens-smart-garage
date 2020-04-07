@@ -28,6 +28,7 @@ def lambda_handler(event, context):
 
     utime = str(int(time.time())) #Current Unix Time
     plate_detected = False
+    confidence_threshold = 70
     bucket = event['Records'][0]['s3']['bucket']['name']
     key = event['Records'][0]['s3']['object']['key']
     #bucket = 'car-license-plate-demo'
@@ -46,11 +47,18 @@ def lambda_handler(event, context):
     if plate_detected:
         #adjust the following code based on license plate format
         PlateNumber = rekognition.detect_text(Image=image)
+        confidence_score = PlateNumber['TextDetections'][1]['Confidence']
         PlateNumber = PlateNumber['TextDetections'][1]['DetectedText']
         PlateNumber = re.sub('[^a-zA-Z0-9 \n\.]', '', PlateNumber).replace(" ","")
         print (PlateNumber)
+        print (confidence_score)
 
-        match = match_plate("CarInfo2", "LicensePlate", PlateNumber)
+        if confidence_score > confidence_threshold:
+            print ('Confidence threshold matched')
+            match = match_plate("CarInfo2", "LicensePlate", PlateNumber)
+        else:
+            print('Confidence threshold did not matched')
+            return 0
 
         if match == 1:
             print ('License Plate Match Found')
