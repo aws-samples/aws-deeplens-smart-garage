@@ -55,7 +55,7 @@ def lambda_handler(event, context):
 
         if confidence_score > confidence_threshold:
             print ('Confidence threshold matched')
-            match = match_plate("CarInfo2", "LicensePlate", PlateNumber)
+            match = match_plate("CarInfo", "LicensePlate", PlateNumber)
         else:
             print('Confidence threshold did not matched')
             return 0
