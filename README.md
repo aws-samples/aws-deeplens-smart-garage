@@ -1,6 +1,8 @@
 ## Smart-Garage
 
-This repository is part of a blog post that guides users through creating a License Plate recognization system to open the garage door which uses object detection model using AWS DeepLens
+This repository is part of a blog post that guides users through creating a License Plate recognization system to open the garage door which uses object detection model powered by AWS DeepLens and Amazon Rekognition
+
+https://aws.amazon.com/blogs/machine-learning/building-a-smart-garage-door-opener-with-aws-deeplens-and-amazon-rekognition/
 
 Following the steps described in the blog post, the final architecture is this:
 
@@ -16,5 +18,3 @@ This lambda function runs on the AWS DeepLens and perform inferences and the nec
 ## License
 
 This library is licensed under the MIT-0 License. See the LICENSE file.
-
-
